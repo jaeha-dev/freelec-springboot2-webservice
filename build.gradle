@@ -33,9 +33,19 @@ repositories {
 // 프로젝트 개발에 필요한 의존성을 선언하는 영역.
 dependencies {
     // compile(= implementation), testCompile(= testImplementation)
-    // implementation: 의존 라이브러리 수정 시, 본 모듈까지만 재빌드
-    // compileOnly: compile 시에만 빌드하고 빌드 결과물에는 포함하지 않음
-    // runtimeOnly: runtime 시에만 필요한 라이브러리인 경우
+    // Gradle 5 버전부터 lombok 설정을 아래와 같이 한다.
+    // (https://github.com/jojoldu/freelec-springboot2-webservice/issues/78)
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
