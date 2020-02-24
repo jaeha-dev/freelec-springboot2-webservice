@@ -1,0 +1,4 @@
+# Created by .ignore support plugin (hsz.mobi)
+# 모든 커밋에서 제외할 대상을 지정한다.
+.gradle
+.idea

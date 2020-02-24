@@ -1,0 +1,41 @@
+buildscript {
+    // ext: build.gradle 에서 사용하는 전역 변수를 설정한다는 의미이다.
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 자바와 스프링 부트를 사용하기 위한 필수 플러그인.
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' // 스프링 부트의 의존성을 관리하는 플러그인.
+
+group 'com.jojoldu.book'
+version '1.0.0-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
+
+repositories {
+    // mavenCentral: 일반적인 저장소. (라이브러리 업로드가 어려움.)
+    // jcenter: 직접 만든 라이브러리를 간단히 업로드 할 수 있도록 개선함.
+    //          또한, 업로드 시 mavenCentral 에도 업로드될 수 있도록 자동화 가능.
+    mavenCentral()
+    jcenter()
+}
+
+// 프로젝트 개발에 필요한 의존성을 선언하는 영역.
+dependencies {
+    // compile(= implementation), testCompile(= testImplementation)
+    // implementation: 의존 라이브러리 수정 시, 본 모듈까지만 재빌드
+    // compileOnly: compile 시에만 빌드하고 빌드 결과물에는 포함하지 않음
+    // runtimeOnly: runtime 시에만 필요한 라이브러리인 경우
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
