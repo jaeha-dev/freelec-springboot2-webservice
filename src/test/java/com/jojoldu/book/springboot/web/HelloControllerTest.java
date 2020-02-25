@@ -1,4 +1,4 @@
-package com.jojoldu.book.springboot;
+package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.web.HelloController;
 import org.junit.Test;
@@ -12,8 +12,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * @title  : 실습용 컨트롤러 테스트 클래스
  * @author : jaeha-dev (Git)
+ * @title  : 실습용 컨트롤러 테스트 클래스
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = HelloController.class)

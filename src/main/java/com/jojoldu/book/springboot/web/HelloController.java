@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @title  : 실습용 컨트롤러 클래스
  * @author : jaeha-dev (Git)
+ * @title  : 실습용 컨트롤러 클래스
  */
 @RestController
 public class HelloController {

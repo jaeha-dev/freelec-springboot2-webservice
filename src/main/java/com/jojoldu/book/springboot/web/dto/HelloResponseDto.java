@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @title  : 실습용 Response Dto 클래스
  * @author : jaeha-dev (Git)
+ * @title  : 실습용 Response Dto 클래스
  */
 @Getter
 @RequiredArgsConstructor
