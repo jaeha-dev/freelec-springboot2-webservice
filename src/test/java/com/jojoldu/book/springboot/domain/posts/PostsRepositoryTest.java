@@ -3,9 +3,12 @@ package com.jojoldu.book.springboot.domain.posts;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import java.time.LocalDateTime;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostsRepositoryTest {
+    private static final Logger logger = LoggerFactory.getLogger(PostsRepositoryTest.class);
 
     @Autowired private PostsRepository postsRepository;
 
@@ -45,5 +49,21 @@ public class PostsRepositoryTest {
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
         assertThat(posts.getAuthor()).isEqualTo(author);
+    }
+
+    @Test
+    public void Auditing_테스트() {
+        // Given
+        LocalDateTime now = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
+        postsRepository.save(Posts.builder().title("제목").content("내용").author("작성자").build());
+
+        // When
+        List<Posts> postsList = postsRepository.findAll();
+
+        // Then
+        Posts posts = postsList.get(0);
+        logger.info("getCreateDate: " + posts.getCreateDate() + " / getModifiedDate:" + posts.getModifiedDate());
+        assertThat(posts.getCreateDate()).isAfter(now);
+        assertThat(posts.getModifiedDate()).isAfter(now);
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 /**
  * @author : jaeha-dev (Git)
@@ -26,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @memo   : @WebMvcTest 는 JPA 기능이 동작하지 않으므로 @SpringBootTest 를 사용하였다.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class PostsApiControllerTest {
 
     @LocalServerPort

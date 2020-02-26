@@ -1,4 +1,9 @@
 spring:
+  h2:
+    console:
+      # H2 웹 콘솔 활성화
+      enabled: true
+
   jpa:
     # 쿼리 출력
     show-sql: true
