@@ -1,11 +1,14 @@
 package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.service.PostsService;
+import com.jojoldu.book.springboot.web.dto.PostsListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : jaeha-dev (Git)
@@ -15,6 +18,15 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PostsApiController {
     private final PostsService postsService;
+
+    /**
+     * 게시글 목록 조회
+     * @return : 조회된 게시글 목록
+     */
+    @GetMapping("/api/v1/posts")
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsService.findAllDesc();
+    }
 
     /**
      * 게시글 상세 조회
@@ -46,5 +58,11 @@ public class PostsApiController {
     public Long update(@PathVariable Long id,
                        @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
+    }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
     }
 }
