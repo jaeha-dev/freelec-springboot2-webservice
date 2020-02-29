@@ -11,3 +11,7 @@ spring:
       hibernate:
         # MySQL 쿼리로 수행하도록 지정 (결과 차이는 없다.)
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  profiles:
+    # application-(oauth).yml 에서 oauth 라는 프로파일 이름을 가져와 포함하도록 한다.
+    include: oauth
