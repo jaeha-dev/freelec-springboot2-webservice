@@ -40,11 +40,16 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    // 소셜 로그인 연동을 위한 OAuth2 클라이언트
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    // DB 기반 세션 저장소
+    compile('org.springframework.session:spring-session-jdbc')
     annotationProcessor('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.projectlombok:lombok')
+    // 스프링 시큐리티 테스트
+    testCompile('org.springframework.security:spring-security-test')
     testAnnotationProcessor('org.projectlombok:lombok')
 }
 

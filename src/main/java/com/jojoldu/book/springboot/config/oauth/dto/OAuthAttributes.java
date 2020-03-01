@@ -28,18 +28,20 @@ public class OAuthAttributes {
     }
 
     /**
-     *
+     * 소셜 로그인 연동
      * @param registrationId        : 현재 로그인 진행 중인 소셜 서비스를 구분하는 코드(구글, 네이버 등)
      * @param userNameAttributeName : OAuth2 로그인 진행 시, 키가 되는 필드 값
      * @param attributes            : OAuth2User 에서 반환하는 사용자 정보
      * @return                      : 하위 메소드 호출
      */
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
+        // 네이버에서 회원 정보는 response 필드의 하위 필드에 속해있다. 하위 필드 중, id 를 userName 으로 지정한다. (교재 208쪽)
+        if (registrationId.equals("naver")) return ofNaver("id", attributes);
         return ofGoogle(userNameAttributeName, attributes);
     }
 
     /**
-     *
+     * 구글 로그인 연동
      * @param userNameAttributeName : OAuth2 로그인 진행 시, 키가 되는 필드 값
      * @param attributes            : OAuth2User 에서 반환하는 사용자 정보
      * @return                      : OAuthAttributes
@@ -50,6 +52,25 @@ public class OAuthAttributes {
                               .email((String) attributes.get("email"))
                               .picture((String) attributes.get("picture"))
                               .attributes(attributes)
+                              .nameAttributeKey(userNameAttributeName)
+                              .build();
+    }
+
+    /**
+     * 네이버 로그인 연동
+     * @param userNameAttributeName : OAuth2 로그인 진행 시, 키가 되는 필드 값
+     * @param attributes            : OAuth2User 에서 반환하는 사용자 정보
+     * @return                      : OAuthAttributes
+     */
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+        // 네이버에서 회원 정보는 response 필드의 하위 필드에 속해있다. (JSON 타입, 교재 207쪽)
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        return OAuthAttributes.builder()
+                              .name((String) response.get("name"))
+                              .email((String) response.get("email"))
+                              .picture((String) response.get("profile_image"))
+                              .attributes(response)
                               .nameAttributeKey(userNameAttributeName)
                               .build();
     }

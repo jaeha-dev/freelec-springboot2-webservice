@@ -7,7 +7,6 @@ import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 /**
@@ -60,6 +59,11 @@ public class PostsApiController {
         return postsService.update(id, requestDto);
     }
 
+    /**
+     * 게시글 삭제
+     * @param id : 게시글 번호
+     * @return   : 삭제된 게시글 번호
+     */
     @DeleteMapping("/api/v1/posts/{id}")
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
